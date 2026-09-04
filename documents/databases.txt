@@ -1,0 +1,3 @@
+Databases are used to store and organize data.
+SQL is commonly used to query relational databases.
+Python applications can connect to databases and perform database operations.

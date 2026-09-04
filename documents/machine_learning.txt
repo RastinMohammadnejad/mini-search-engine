@@ -1,0 +1,3 @@
+Machine learning is a field of artificial intelligence.
+Machine learning algorithms learn patterns from data.
+Python is widely used for machine learning with libraries such as NumPy and pandas.

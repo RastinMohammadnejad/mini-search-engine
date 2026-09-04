@@ -1,0 +1,3 @@
+Django is a Python web framework.
+Django is used to build web applications and websites.
+Django provides models, views, templates, forms, and an ORM.
