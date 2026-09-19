@@ -7,10 +7,10 @@ def search(index, query, tokenize):
         if word not in index:
             continue
 
-        for filename in index[word]:
+        for filename, count in index[word].items():
             if filename not in scores:
                 scores[filename] = 0
 
-            scores[filename] += 1
+            scores[filename] += count
 
     return scores
