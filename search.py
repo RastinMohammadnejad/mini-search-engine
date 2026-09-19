@@ -1,5 +1,6 @@
 def search(index, idf, query, tokenize):
     query_words = tokenize(query)
+    query_words = set(query_words)
 
     scores = {}
 
