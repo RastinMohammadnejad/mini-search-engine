@@ -18,31 +18,45 @@ def load_documents():
     return documents
 
 
+def display_results(results):
+    if not results:
+        print("\nNo results found.")
+        return
+
+    print("\nResults:")
+
+    sorted_results = sorted(
+        results.items(),
+        key=lambda item: item[1],
+        reverse=True
+    )
+
+    for filename, score in sorted_results:
+        print(f"- {filename} (score: {score:.4f})")
+
+
 def main():
     documents = load_documents()
 
-    print(f"Found {len(documents)} document(s).\n")
+    print(f"Found {len(documents)} document(s).")
 
     index = build_index(documents, tokenize)
     idf = calculate_idf(index, len(documents))
 
-    query = input("Search: ")
+    while True:
+        query = input("\nSearch (type 'exit' to quit): ").strip()
 
-    results = search(index, idf, query, tokenize)
+        if query.lower() == "exit":
+            print("Goodbye!")
+            break
 
-    if results:
-        print("\nResults:")
+        if not query:
+            print("Please enter a search query.")
+            continue
 
-        sorted_results = sorted(
-            results.items(),
-            key=lambda item: item[1],
-            reverse=True
-        )
+        results = search(index, idf, query, tokenize)
 
-        for filename, score in sorted_results:
-            print(f"- {filename} (score: {score:.4f})")
-    else:
-        print("\nNo results found.")
+        display_results(results)
 
 
 if __name__ == "__main__":
