@@ -1,5 +1,6 @@
 from pathlib import Path
-from indexer import build_index
+
+from indexer import build_index, calculate_idf
 from search import search
 from text_processor import tokenize
 
@@ -23,10 +24,11 @@ def main():
     print(f"Found {len(documents)} document(s).\n")
 
     index = build_index(documents, tokenize)
+    idf = calculate_idf(index, len(documents))
 
     query = input("Search: ")
 
-    results = search(index, query, tokenize)
+    results = search(index, idf, query, tokenize)
 
     if results:
         print("\nResults:")
@@ -38,7 +40,7 @@ def main():
         )
 
         for filename, score in sorted_results:
-            print(f"- {filename} (score: {score})")
+            print(f"- {filename} (score: {score:.4f})")
     else:
         print("\nNo results found.")
 

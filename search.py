@@ -1,4 +1,4 @@
-def search(index, query, tokenize):
+def search(index, idf, query, tokenize):
     query_words = tokenize(query)
 
     scores = {}
@@ -7,10 +7,12 @@ def search(index, query, tokenize):
         if word not in index:
             continue
 
-        for filename, count in index[word].items():
+        for filename, term_frequency in index[word].items():
+            score = term_frequency * idf[word]
+
             if filename not in scores:
                 scores[filename] = 0
 
-            scores[filename] += count
+            scores[filename] += score
 
     return scores

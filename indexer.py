@@ -1,3 +1,4 @@
+import math
 from collections import Counter
 
 
@@ -15,3 +16,16 @@ def build_index(documents, tokenize):
             index[word][filename] = count
 
     return index
+
+
+def calculate_idf(index, total_documents):
+    idf = {}
+
+    for word, documents in index.items():
+        document_frequency = len(documents)
+
+        idf[word] = math.log(
+            total_documents / document_frequency
+        )
+
+    return idf
