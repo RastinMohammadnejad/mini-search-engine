@@ -1,3 +1,6 @@
+import math
+
+
 def search(index, idf, query, tokenize):
     query_words = tokenize(query)
     query_words = set(query_words)
@@ -9,7 +12,8 @@ def search(index, idf, query, tokenize):
             continue
 
         for filename, term_frequency in index[word].items():
-            score = term_frequency * idf[word]
+            tf = 1 + math.log(term_frequency)
+            score = tf * idf[word]
 
             if filename not in scores:
                 scores[filename] = 0
