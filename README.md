@@ -302,7 +302,8 @@ This project was built as a practical implementation of fundamental information 
 
 ## Author
 
-# Rastin Mohammadnejad
+**Rastin Mohammadnejad**
 
-- GitHub: https://github.com/RastinMohammadnejad
-- Repository: https://github.com/RastinMohammadnejad/mini-search-engine
+Computer Engineering Student | Python & Django Developer
+
+GitHub: [RastinMohammadnejad](https://github.com/RastinMohammadnejad)
