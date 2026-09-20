@@ -4,6 +4,11 @@
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Pytest
+.pytest_cache/
 
 # IDE
 .vscode/
@@ -11,6 +16,17 @@ __pycache__/
 
 # Environment variables
 .env
+.env.*
 
 # Temporary files
 *.tmp
+*.temp
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# Coverage
+.coverage
+htmlcov/
