@@ -107,3 +107,45 @@ def test_empty_document():
 
     assert "doc1.txt" not in results
     assert "doc2.txt" in results
+
+
+def test_logarithmic_tf_ranking():
+    documents = {
+        "doc1.txt": "python",
+        "doc2.txt": "python python python",
+        "doc3.txt": "django",
+    }
+
+    index = build_index(documents, tokenize)
+    idf = calculate_idf(index, len(documents))
+
+    results = search(
+        index,
+        idf,
+        "python",
+        tokenize
+    )
+
+    assert results["doc2.txt"] > results["doc1.txt"]
+
+
+def test_logarithmic_tf_grows_less_than_linearly():
+    documents = {
+        "doc1.txt": "python",
+        "doc2.txt": "python python python python",
+        "doc3.txt": "django",
+    }
+
+    index = build_index(documents, tokenize)
+    idf = calculate_idf(index, len(documents))
+
+    results = search(
+        index,
+        idf,
+        "python",
+        tokenize
+    )
+
+    ratio = results["doc2.txt"] / results["doc1.txt"]
+
+    assert ratio < 4
