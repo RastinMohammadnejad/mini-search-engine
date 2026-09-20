@@ -300,9 +300,9 @@ Possible future improvements include:
 
 This project was built as a practical implementation of fundamental information retrieval concepts, including tokenization, inverted indexes, TF-IDF, and document ranking.
 
-Author
+## Author
 
-## Rastin Mohammadnejad
+# Rastin Mohammadnejad
 
 - GitHub: https://github.com/RastinMohammadnejad
 - Repository: https://github.com/RastinMohammadnejad/mini-search-engine
