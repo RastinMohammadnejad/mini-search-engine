@@ -2,28 +2,31 @@ from pathlib import Path
 
 from indexer import build_index, calculate_idf
 from search import search
+from snippet import get_snippet
 from text_processor import tokenize
 
 
 DOCUMENTS_DIR = Path("documents")
+MAX_RESULTS = 5
 
 
 def load_documents():
     documents = {}
 
     for file_path in DOCUMENTS_DIR.glob("*.txt"):
-        with open(file_path, "r", encoding="utf-8") as file:
-            documents[file_path.name] = file.read()
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                documents[file_path.name] = file.read()
+        except OSError as error:
+            print(f"Could not read {file_path.name}: {error}")
 
     return documents
 
 
-def display_results(results):
+def display_results(results, documents, query):
     if not results:
         print("\nNo results found.")
         return
-
-    print("\nResults:")
 
     sorted_results = sorted(
         results.items(),
@@ -31,8 +34,17 @@ def display_results(results):
         reverse=True
     )
 
-    for filename, score in sorted_results:
-        print(f"- {filename} (score: {score:.4f})")
+    total_results = len(sorted_results)
+    displayed_results = sorted_results[:MAX_RESULTS]
+
+    print(f"\nResults: {total_results}")
+    print(f"Showing top {len(displayed_results)} result(s):")
+
+    for position, (filename, score) in enumerate(displayed_results, start=1):
+        snippet = get_snippet(documents[filename], query)
+
+        print(f"\n{position}. {filename} (score: {score:.4f})")
+        print(f"   {snippet}")
 
 
 def main():
@@ -56,7 +68,7 @@ def main():
 
         results = search(index, idf, query, tokenize)
 
-        display_results(results)
+        display_results(results, documents, query)
 
 
 if __name__ == "__main__":
