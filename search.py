@@ -16,4 +16,10 @@ def search(index, idf, query, tokenize):
 
             scores[filename] += score
 
+    scores = {
+        filename: score
+        for filename, score in scores.items()
+        if score > 0
+    }
+
     return scores
